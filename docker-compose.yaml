@@ -1,0 +1,19 @@
+version: "3.0"
+services: 
+  xpra:
+    build:
+      context: ./ubuntu-xpra-server
+      args:
+        postgres_config_file: /etc/postgresql/postgresql.conf
+    image: xpra
+    container_name: xpra
+    ports:
+      - "14500:14500"
+    restart: always
+    networks:
+      - lost
+    volumes:
+      - ./resources/orant:/home/taster/.wine/drive_c/orant
+networks:
+  lost:
+    driver:  bridge
